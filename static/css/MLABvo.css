@@ -1,0 +1,65 @@
+body {
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+}
+
+
+.sidebar {
+	position: fixed;
+    bottom: 0px;
+    left: 0px;
+	top: 51px;
+	z-index: 1000;
+	background-color: gray;
+	color: darkgray;
+	display: block;
+	padding: 20px;
+	overflow-x: hidden;
+	overflow-y: auto;
+
+    background-color: #f5f5f5;
+    border-right: 1px solid #eee;
+
+}
+
+.sidebar title{
+	font-size: 2em;
+	border-bottom: solid 1px darkblue;
+	padding: 30px;
+}
+
+.main{
+	top: 51px;
+
+}
+
+span.projects{
+	font-size: 2em;
+	color: rgb(#55a);
+	margin-left: -10px;
+}
+
+
+.projects li :hover{
+	font-size: 1.1em;
+	transition: 500ms;
+	text-decoration: none;
+	color: red;
+	width: 100%
+}
+
+
+.sidebar{
+	list-style: none;
+}
+
+.sidebar ul{
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+
+}

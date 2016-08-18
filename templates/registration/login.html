@@ -1,0 +1,30 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/user.css' %}">
+
+        <title>MLABvo | login</title>
+    </head>
+
+    <body>
+    <div class="container">
+
+        <form id="login_form" method="post" action="/user/login/" class="form-signin">
+        <h2 class="form-signin-heading">Please sign in</h2>
+         {% if message %}
+            <div class="alert alert-danger" role="alert">{{message}}
+            </div>
+        {% endif %}
+            {% csrf_token %}
+            <label for="inputUsername" class="sr-only">Username: </label>
+            <input type="text" id="inputUsername" name="username" value="" placeholder="Username" class="form-control" required autofocus/>
+            <label for="inputPassword" class="sr-only">Password: </label>
+            <input type="password" id="inputPassword" name="password" value="" class="form-control" required/>
+
+            <input type="submit" value="submit" class="btn btn-lg btn-primary btn-block" />
+        </form>
+    </div>
+    </body>
+</html>

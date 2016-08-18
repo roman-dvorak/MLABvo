@@ -1,0 +1,30 @@
+
+{% extends 'base.html' %}
+
+
+{% block content %}
+{% load staticfiles %}
+<div class="row">
+	{% for element, value in BZ_element.items %}
+		{# 'realTimeMap': ['/realtime', ".png", "title"] #}
+		
+
+		<div class="col-xs-12 col-md-4">
+		   <!-- Card -->
+		   <article class="card animated fadeInLeft">
+		   <div class="frontpage_square image">
+		    <img class="image card-img-top img-responsive full-width" src="{% static value.1 %}" alt="{% static value.1 %" />
+		    </div>
+		   </article><!-- .end Card -->
+		  </div>
+
+	{% endfor %}
+
+
+oooo
+{{projects}}
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+
+<div>
+	<h2>Tables</h2>
+
+	<table class="table table-striped">
+		<thead>
+		<tr><td>id</td><td>Schema name</td><td>Table name</td><td>Table type</td><td>utype</td><td>Description</td></tr>
+		</thead>
+		<tbody>
+		{% for project in tables %}
+		<tr>
+			<td>{{project.0}}</td>
+			<td>{{project.1}}</td>
+			<td><a href="/admin/table/{{project.2}}">{{project.2}}</a></td>
+			<td>{{project.3}}</td>
+			<td>{{project.4}}</td>
+			<td>{{project.5}}</td>
+			<td>{{project.6}}</td>
+			<td>{{project.7}}</td>
+			<td>{{project.8}}</td>
+		</tr>
+		{% endfor %}
+		</tbody>
+
+
+	</table>
+</div>
+
+
+{% endblock %}
