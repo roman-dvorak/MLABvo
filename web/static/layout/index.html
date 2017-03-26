@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block meta %}
+    <style type="text/css">
+
+    body{
+      background: url(/rmds02d_transparent.png) bottom right no-repeat fixed;
+      background-size: 50% auto;
+      min-width: 900px;
+      margin: 0px;
+      background-color: #eaedf1;
+      color: #383641;
+      font-family: Helvetica, Arial, sans-serif;
+
+    }
+
+    #indexblock{
+      width: 350px;
+      height: 250px;
+      background-color: red;
+      margin: 20px;
+      padding: 5px
+
+    }
+
+    #floater {
+      position: absolute;
+      float: left;
+      width: 100%;
+      text-align: center;
+      vertical-align: center;
+    }
+
+    #floater a{
+    width: 250px;
+    height: 250px;
+    display: inline-block;
+    float: left;
+    margin-left: 50px;
+    margin-top: 50px;
+    background-size: cover;
+    }
+
+
+    #Bfill{
+      height: 100%;
+      width: 100%;
+    }
+
+    #floater a:hover {
+      box-shadow: 10px 10px 20px grey;
+      background-color: red;
+    }
+
+
+    </style>
+
+
+{% end %}{% block header %}
+
+   {% if user %} {{user}} <small><a href="/auth/logout/">logout</a>{% else %} <a href="/auth/login/">login</a></small> {% end %}  Právě na tomto serveru probíhají vylepšení softwaru RTbolidozor a MLABvo. Omluvte proto dočasnou nefunkčnost systému. 
+
+{% end %}{% block clear %}
+
+    <div id="floater">
+     <a href="/realtime" style="background: url('/IndexMapText.png') no-repeat;"></a>
+     <a href="/multibolid" style="background: url('/IndexMBText.png') no-repeat;"></a>
+     <a href="/counts" style="background: url('/IndexCountsText.png') no-repeat;"></a>
+     <a href="/database" style="background: url('/IndexBrowser.png') no-repeat;"> <br> <br> DB reader</a>
+     <a href="/stats" style="background: url('/IndexBrowser.png') no-repeat;"> <br> <br> Stats</a>
+     <a href="http://space.astro.cz/bolidozor/support/js9browser/#/bolidozor/" style="background: url('/IndexSpaceText.png') no-repeat;"> </a>
+     <a href="http://wiki.bolidozor.cz/" style="background: url('/IndexWIKIText.png') no-repeat;"> </a>
+
+    </div>
+    
+{% end %}

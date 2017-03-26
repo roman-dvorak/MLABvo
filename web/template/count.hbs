@@ -1,0 +1,55 @@
+{% extends "base.hbs" %}
+{% block container %}
+    <script type="text/javascript">
+$(window).ready(function () {
+    console.log("done")
+});
+    </script>
+ 
+    <div class="block_header">
+        All <span style="size: small;"> @ bolidozor</span>
+        
+    </div>
+    
+    <div class="block_content">
+        <div>
+            <img type="image/svg+xml" src="/static/graphs/plotJS_all.svg"></img>
+        </div>
+        <div>
+            <img type="image/svg+xml" src="/static/graphs/yeartrend_all.svg"></img>
+        </div>
+        {#<div>
+            <object type="image/svg+xml" data="/browser/yearduration/" style="width: 100%;" height="500" border="0"></object>
+        </div>#}
+    </div>
+
+    <div class="block_header">
+        Jednotlive stanice
+    </div>
+    
+    
+    {% for station in _sql("SELECT namesimple, name FROM MLABvo.bolidozor_station WHERE status < 10 ORDER BY status;") %}
+    
+    <div class="block_header">
+        {{station[0]}} <span style="size: small;"> @ {{station[1]}} </span>
+        
+    </div>
+    
+    <div class="block_content">
+        <!-- Správce: <a href="mailto:{{station[0]}}">{{station[0]}}</a> -->
+        <div>
+            <img type="image/svg+xml" src="/static/graphs/plotJS_{{station[0]}}.svg"></img>
+            {#<object type="image/svg+xml" data="/browser/plotJS/{{station[0]}}/?width=690&height=280&month={{parent.get_argument('month', 'last')}}" style="width: 100%;" height="500" border="0"></object>#}
+        </div>
+        <div>
+            <img type="image/svg+xml" src="/static/graphs/yeartrend_{{station[0]}}.svg"></img>
+            {#<object type="image/svg+xml" data="/browser/yeartrend/{{station[0]}}/?width=690&height=100&month={{parent.get_argument('month', 'last')}}" style="width: 100%;" height="500" border="0"></object>#}
+        </div>
+    </div>
+
+    {% end %}
+
+
+   
+
+{% end %}

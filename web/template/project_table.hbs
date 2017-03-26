@@ -1,0 +1,140 @@
+{% extends "base.hbs" %}
+{% block meta %}
+{% end %}
+{% block container %}
+
+<nav class="breadcrumb bg-faded">
+  <li class="breadcrumb-item"><a href="/">MLABvo</a></li>
+  <li class="breadcrumb-item"><a href="/project/{{project}}">{{project}}</a></li>
+  <li class="breadcrumb-item active">{{table}}</li>
+</nav>
+{{count}}
+
+<div class="card">
+  <div class="card-header">
+    {{table}}
+
+
+  </div>
+  <div class="card-block flex-row flex-nowrap" style="padding: 0px; overflow-y: hidden; overflow-x: scroll;">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          {% for col in columns%}
+            <th>{{col[2]}}</th>
+          {% end %}
+          {% set n = len(columns) %}
+        </tr>
+      </thead>
+      <tbody>
+          {% for row_id, row in enumerate(data) %}
+            <tr>
+            <td>{{row_id+1}}</td>
+            {% for i in range(n) %}
+              <td>{{row[i]}}</td>
+            {% end %}
+            </tr>
+          {% end %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card-footer">
+
+  </div>
+
+<script type="text/javascript">
+  
+function setPage(page) {
+  console.log(page);
+}
+
+
+</script>
+
+{% end %}
+
+
+          </div>
+
+{% block navbar %}
+
+
+<br>
+<div class="card">
+  <div class="card-header">
+    Table filter
+  </div>
+  <div class="card-block">
+
+
+
+<form action="#" method="get">
+<ul class="pagination">
+    {% if page != 0%}<li class="page-item distabled"> <a class="page-link" onclick="setPage({{0}})" value ="{{0}}" tabindex="-1">First <small>0</small></a> </li>{%end%}
+    {% if page > 100%}<li class="page-item distabled"> <a class="page-link" onclick="setPage({{page-100}})" value ="{{page-100}}" tabindex="-1">{{page-100}}</a> </li>{%end%}
+    {% if page > 10%}<li class="page-item distabled"> <a class="page-link" onclick="setPage({{page-10}})" value ="{{page-10}}" tabindex="-1">{{page-10}}</a> </li>{%end%}
+    {% if page > 0%}<li class="page-item distabled"> <a class="page-link" onclick="setPage({{page-1}})" value ="{{page-1}}" >{{page-1}}</a> </li>{%end%}
+    <li class="page-item distabled active"> <a class="page-link" onclick="setPage({{page}})" value ="{{page}}">{{page}}</a> </li>
+    <li class="page-item distabled"> <a class="page-link" onclick="setPage({{page+1}})" value ="{{page+1}}" >{{page+1}}</a> </li>
+    <li class="page-item distabled"> <a class="page-link" onclick="setPage({{page+10}})" value ="{{page+10}}" >{{page+10}}</a> </li>
+    <li class="page-item distabled"> <a class="page-link" onclick="setPage({{page+100}})" value ="{{page+100}}" >{{page+100}}</a> </li>
+    <li class="page-item distabled"> <a class="page-link" onclick="setPage({{(count/limit)+1}})" value ="{{(count/limit)+1}}" >Last <small>{{(count/limit)+1}}</small></a> </li>
+</ul> 
+
+<div class="input-group">
+    <label class="input-group-addon">Page</label>
+    <input class="form-control" type="number" value="{{page}}" id="page" min="0" max="{{(count/limit)+1}}" step="1" name="page">
+    <label class="input-group-addon">Limit</label>
+    <input class="form-control" type="number" value="{{limit}}" id="limit" min="5" max="5000" step="1" name="limit">
+    <!-- <a class="input-group-addon btn-primary" href="#">Go</a> -->
+</div>
+
+<br>
+<div class="input-group">
+    <label class="form-control input-group-addon">WHERE</label>
+    <select class="form-control" id="where" name="where">
+      {% for col in columns%}
+        <option value="{{col[0]}}" {% if col[0] == sql_parameters[4] %}selected {%end%}>{{col[2]}}</option>
+      {% end %}
+    </select>
+    <select class="form-control input-group-addon" id="whereoperator" name="whereoperator">
+      {% for col in ['=', '!=', '>', '<', '>=', '<=']%}
+        <option value="{{col}}" {% if col == sql_parameters[5] %}selected {%end%}>{{col}}</option>
+      {% end %}
+    </select>
+    <input class="form-control" type="text" id="whereparam" name="whereparam" value="{{sql_parameters[6]}}">
+</div>
+
+<br>
+<div class="input-group">
+    <label class="form-control input-group-addon">ORDER BY</label>
+    <select class="form-control" id="orderby" name="orderby">
+      {% for col in columns%}
+        <option value="{{col[0]}}" {% if col[0] == sql_parameters[2] %}selected {%end%}>{{col[2]}}</option>
+      {% end %}
+    </select>
+
+    <select class="form-control" type="text" name="desc">
+      <option value="DESC">descent</option>
+      <option value="ASC">ascent</option>
+    </select>
+</div>
+<br>
+<input type="submit" class="form-control btn-primary" value="Submit">
+
+</form>
+
+
+
+
+
+
+
+
+  </div>
+</div>
+
+
+{% end %}

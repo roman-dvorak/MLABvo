@@ -1,0 +1,67 @@
+{% extends "base.hbs" %}
+{% block meta %}
+{% end %}
+{% block container %}
+
+<nav class="breadcrumb bg-faded">
+  <li class="breadcrumb-item"><a href="/">MLABvo</a></li>
+  <li class="breadcrumb-item active">{{project}}</li>
+</nav>
+
+<h2><span style="font-size:10pt;">{{project_id}}</span>  {{project}}</h2>
+
+<div class="card">
+  <div class="card-header">
+    Tables
+  </div>
+  <div class="card-block" style="padding: 0px;">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Table Name</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          {%for table in _sql("SELECT `id`, `table_name`, `description` FROM vo_tables WHERE id_project = %s ORDER BY table_index;" %(project_id)) %}
+            <tr>
+            <td>{{table[0]}}</td>
+            <td><a href="/table/{{project}}/{{table[1]}}">{{table[1]}}</a></td>
+            <td>{{table[1]}}</td>
+            <td>{{table[2]}}</td>
+            </tr>
+          {%end%}
+      </tbody>
+    </table>
+  </div>
+
+
+  <div class="card-header">
+    Views
+  </div>
+  
+  <div class="card-block" style="padding: 0px;">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Table Name</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          {%for table in _sql("SELECT `id`, `table_name`, `description` FROM vo_views WHERE id_project = %s ORDER BY table_index;" %(project_id)) %}
+            <tr>
+            <td>{{table[0]}}</td>
+            <td><a href="/table/{{project}}/{{table[1]}}">{{table[1]}}</a></td>
+            <td>{{table[1]}}</td>
+            <td>{{table[2]}}</td>
+            </tr>
+          {%end%}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% end %}
