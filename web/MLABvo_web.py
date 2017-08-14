@@ -86,6 +86,7 @@ class WebApp(tornado.web.Application):
 
 def main():
     import os
+    print os.path.join(os.path.dirname(__file__))
     os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
     tornado.options.parse_command_line()

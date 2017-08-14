@@ -8,7 +8,6 @@
   <li class="breadcrumb-item"><a href="/project/{{project}}">{{project}}</a></li>
   <li class="breadcrumb-item active">{{table}}</li>
 </nav>
-{{count}}
 
 <div class="card">
   <div class="card-header">
@@ -132,6 +131,13 @@ function setPage(page) {
 
 
 
+
+  </div>
+  <div class="card-footer">
+  {% set n = len(columns) %}
+  <p>Tato tabulka obsahuje {{count}} záznamů a {{n}} sloupců.</p>
+  <p>Tabulka neobsahuje žádná rozšíření.</p>
+    
 
   </div>
 </div>
