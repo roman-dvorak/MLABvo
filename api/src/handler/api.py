@@ -29,7 +29,7 @@ class api(tornado.web.RequestHandler):    # /rosapi/publist/(.*)
 
                 filename = str(self.get_argument('filename', None))
                 filename_original = str(self.get_argument('filename_original', filename))
-                filepath = str(self.get_argument('filepath', self.get_argument('filelocation', None)))  #TODO zde odstranit prijmani parametru filelocation (je to tu pro zpetnou kompatibilitu od 2017/03), nyni se pouziva parametr filepath
+                filepath = str(self.get_argument('filepath'))
                 checksum = str(self.get_argument('checksum', None))
                 id_observer = int(self.get_argument('id_station', 0))
                 station = str(self.get_argument('station', None))
@@ -40,7 +40,7 @@ class api(tornado.web.RequestHandler):    # /rosapi/publist/(.*)
 
                 id_station = _sql("SELECT id FROM bolidozor_station WHERE namesimple = '%s'" %(station))
 
-                if len(id_station) == 0:
+                if len(id_station) == 0:    # pokud stanice neexistuje - vytvorit
                     _sql("INSERT INTO `MLABvo`.`bolidozor_station` (`name`, `namesimple`, `status`, `observatory`, `web`, `owner`, `hardware`, `comment`) VALUES ('%s', '%s', '10', '0', '0', '0', 'New station - automatically created', NOW());" %(station, station))
                     id_station = _sql("SELECT id FROM bolidozor_station WHERE namesimple = '%s'" %(station))
 
