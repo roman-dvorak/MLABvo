@@ -9,7 +9,7 @@ import sys
 
 def _sql(query, read=False, db = 'MLABvo'):
         print "#>", query
-        connection = mdb.connect(host="localhost", user="root", passwd="root", db=db, use_unicode=True, charset="utf8")
+        connection = mdb.connect(host="localhost", user="MLABvo", passwd="MlabVO1231", db=db, use_unicode=True, charset="utf8")
         cursorobj = connection.cursor()
         result = None
         try:

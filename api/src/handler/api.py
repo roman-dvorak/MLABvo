@@ -38,8 +38,13 @@ class api(tornado.web.RequestHandler):    # /rosapi/publist/(.*)
                 lastaccestime = str(self.get_argument('lastaccestime', datetime.datetime.now()))
                 indextime = str(self.get_argument('indextime', '0000-00-00 00:00:00'))
 
-                id_station = _sql("SELECT id FROM bolidozor_station WHERE namesimple = '%s'" %(station))[0][0]
-                #print id_station
+                id_station = _sql("SELECT id FROM bolidozor_station WHERE namesimple = '%s'" %(station))
+
+                if len(id_station) == 0:
+                    _sql("INSERT INTO `MLABvo`.`bolidozor_station` (`name`, `namesimple`, `status`, `observatory`, `web`, `owner`, `hardware`, `comment`) VALUES ('%s', '%s', '10', '0', '0', '0', 'New station - automatically created', NOW());" %(station, station))
+                    id_station = _sql("SELECT id FROM bolidozor_station WHERE namesimple = '%s'" %(station))
+
+                id_station = id_station[0][0]
                 _sql("REPLACE INTO `MLABvo`.`bolidozor_fileindex` SET `filename_original` = '%s', `filename` = '%s', `id_observer` = '%d', `id_server` = '%d', `filepath` = '%s', `obstime` = '%s', `uploadtime` = '%s', `lastaccestime` = '%s', `indextime` = '%s', `checksum` = '%s';" %(filename_original, filename, id_station, id_server, filepath, uploadtime, uploadtime, lastaccestime, indextime, checksum))
                 
                 return self.write("ACK<br> New bolidozor file was indexed")
